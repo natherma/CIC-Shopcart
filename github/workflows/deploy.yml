@@ -1,0 +1,14 @@
+name: delpoy to AWS
+
+#trigger
+on: workflow_dispatch
+
+jobs: 
+    deploy
+    runs-on: ubuntu-latest
+
+    steps:
+        - name: setup nodejs
+          uses: action/setup-node#v4
+          with: 
+               node-version: "14"
