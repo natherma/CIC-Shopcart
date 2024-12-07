@@ -1,7 +1,11 @@
 name: delpoy to AWS
 
 #trigger
-on: workflow_dispatch
+on: 
+    push:
+        branches:
+            - master
+            - main
 
 jobs: 
     deploy
