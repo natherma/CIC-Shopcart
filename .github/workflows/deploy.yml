@@ -1,18 +1,29 @@
 name: delpoy to AWS
 
 #trigger
-on:
-  push:
-    branches:
-      - master
-      - main
+on: workflow_dispatch
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: setup nodejs
         uses: actions/setup-node@v4
         with:
-          node-version: "14"
+          node-version: "21"
+
+      - name: checkout code
+        uses: actions/checkout@v2
+
+      - name: install dependdency
+        run: npm install
+
+      - name: install pm2 gloabally
+        run: npm install pm2 -g
+
+      - name: run the test
+        run: npm test
+
+      - name: deploy to aws
+        run: pm2 start src/index.js
